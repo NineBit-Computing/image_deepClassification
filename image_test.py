@@ -2,6 +2,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from PIL import Image
 import ollama
 from transformers import AutoModel, AutoTokenizer
+from fastapi import FastAPI, Request
+from pydantic import BaseModel
+from typing import List
+
 
 # Image vision model vikhyatk/moondream2 from hugging face
 def model_1(image_path, prompt):
@@ -56,21 +60,13 @@ def llm_model(answer,res,response,final_prompt):
             {
                 "role" : "user",
                 "content" : final_prompt,
-                "images" :[image_path]
             }
         ]
     )
     print("Final Result")
     print(final_response['message']['content'])
+    return final_response['message']['content']
 
 
-image_path = 'image/auto.jpg'
-user_question = input("Enter your question Related to the Picture >>> ")
- 
-prompt ='describe this image and make sure to include anything notable about it (include text you see in the image)'
-answer=model_1(image_path,prompt)
-res=model_2(image_path,prompt)
-response=model_3(image_path,prompt)
 
-final_prompt = f"Using the following context:{answer}\n\n{res}\n\n{response}\n\nAnswer the question: {user_question}"
-llm_model(answer,res,response,final_prompt)
+

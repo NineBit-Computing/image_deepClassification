@@ -39,7 +39,6 @@ async def handle_image_prompt(modelDetail: ModelDetail):
     final_response = image_test.llm_model(
         results.get("model_1"),
         results.get("model_2"),
-        results.get("model_3"),
         final_prompt,
     )
     

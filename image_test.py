@@ -40,17 +40,6 @@ def model_2(image_path,prompt):
     print(res['message']['content'])
     return res
 
-# Image vision model internlm/internlm-xcomposer2-vl-1_8b from hugging face
-def model_3(image_path,prompt):
-    model = AutoModel.from_pretrained('internlm/internlm-xcomposer2-vl-1_8b', trust_remote_code=True)
-    tokenizer = AutoTokenizer.from_pretrained('internlm/internlm-xcomposer2-vl-1_8b', trust_remote_code=True)
-    question = f'<ImageHere> {prompt}'
-    image = image_path
-    response = model.chat(tokenizer, query=question, image=image, history=[], do_sample=False)
-    print("Model3")
-    print('Model-3 >>>>',response)
-    return response
-
 # Language mode llama3 from ollama
 def llm_model(answer,res,response,final_prompt):
     
